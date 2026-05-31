@@ -28,7 +28,7 @@ jobs:
           python -m maintainer_radar gate reports/github-snapshot.json --output reports/gate.md
       - name: Upload gate report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: release-quality-gate
           path: reports/
@@ -46,7 +46,7 @@ jobs:
           python -m pip install build
           python -m build
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: dist
           path: dist/*

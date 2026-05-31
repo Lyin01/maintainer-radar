@@ -30,7 +30,7 @@ jobs:
           python -m maintainer_radar apply-pack reports/github-snapshot.json --repository-url "https://github.com/$GITHUB_REPOSITORY" --output reports/application-pack.md
           python -m maintainer_radar gate reports/github-snapshot.json --warn-only --output reports/gate.md
       - name: Upload reports
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: maintainer-radar-report
           path: reports/
