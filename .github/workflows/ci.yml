@@ -29,4 +29,4 @@ jobs:
         run: |
           python -m maintainer_radar analyze examples/github-snapshot.json --output reports/triage.md
           python -m maintainer_radar brief examples/github-snapshot.json --output reports/codex-brief.md
-
+          python -m maintainer_radar apply-pack examples/github-snapshot.json --repository-url https://github.com/example/critical-oss-project --output reports/application-pack.md

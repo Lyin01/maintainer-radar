@@ -30,6 +30,26 @@ class CliTests(unittest.TestCase):
             self.assertIn("Codex Maintenance Brief", text)
             self.assertIn("Requested Codex Work", text)
 
+    def test_apply_pack_writes_application_evidence(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            output = Path(tmp) / "application-pack.md"
+            result = main(
+                [
+                    "apply-pack",
+                    str(ROOT / "examples" / "github-snapshot.json"),
+                    "--repository-url",
+                    "https://github.com/example/critical-oss-project",
+                    "--output",
+                    str(output),
+                ]
+            )
+
+            self.assertEqual(result, 0)
+            text = output.read_text(encoding="utf-8")
+            self.assertIn("Codex For Open Source Application Pack", text)
+            self.assertIn("Character count: 336 / 500", text)
+            self.assertIn("P0/P1 issues detected: 2", text)
+
     def test_snapshot_github_writes_json(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             output = Path(tmp) / "snapshot.json"

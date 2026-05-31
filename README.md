@@ -31,6 +31,7 @@ Fetch a live GitHub snapshot:
 ```bash
 python -m maintainer_radar snapshot-github owner/name --output reports/github-snapshot.json
 python -m maintainer_radar analyze reports/github-snapshot.json --output reports/triage.md
+python -m maintainer_radar apply-pack reports/github-snapshot.json --repository-url https://github.com/owner/name --output reports/application-pack.md
 ```
 
 ## Input Format
@@ -51,7 +52,8 @@ The Codex for Open Source form asks for a public GitHub username, a public repos
 - Working maintainer automation with tests and sample outputs.
 - CI, CodeQL, release workflow, issue templates, PR template, security policy, governance, and contribution docs.
 - A scheduled maintenance report workflow that fetches GitHub data and exports review artifacts.
-- Committed sample output in [examples/sample-report.md](examples/sample-report.md) and [examples/sample-codex-brief.md](examples/sample-codex-brief.md).
+- Committed sample output in [examples/sample-report.md](examples/sample-report.md), [examples/sample-codex-brief.md](examples/sample-codex-brief.md), and [examples/sample-application-pack.md](examples/sample-application-pack.md).
+- Application readiness output with character counts and missing-evidence checks for the Codex for Open Source form.
 - A prepared application dossier in [docs/codex-for-open-source-application.md](docs/codex-for-open-source-application.md).
 - A public launch checklist in [docs/publication-checklist.md](docs/publication-checklist.md).
 

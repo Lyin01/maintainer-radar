@@ -7,6 +7,7 @@ Use this checklist to turn the local repository into a public GitHub project.
 - [ ] Replace `YOUR_GITHUB_USERNAME` in `pyproject.toml`, `.github/ISSUE_TEMPLATE/config.yml`, and docs.
 - [ ] Run `python -m unittest`.
 - [ ] Run the sample CLI commands from the README.
+- [ ] Generate `reports/application-pack.md` and review missing evidence.
 - [ ] Review `docs/codex-for-open-source-application.md` and keep claims honest.
 - [ ] Choose a package name if publishing to PyPI later.
 
@@ -42,5 +43,6 @@ git push -u origin main
 - [ ] Enable GitHub security advisories.
 - [ ] Enable Dependabot alerts.
 - [ ] Create `v0.1.0` release notes with sample report output.
+- [ ] Run the Maintenance Report workflow and download the application pack artifact.
 - [ ] Add real adoption or ecosystem evidence to the application dossier.
 - [ ] Submit the Codex for Open Source form.

@@ -4,6 +4,7 @@ import argparse
 import json
 from pathlib import Path
 
+from .application import build_application_pack
 from .config import DEFAULT_CONFIG_TEXT, load_config
 from .github_api import fetch_repository_snapshot
 from .loader import load_snapshot
@@ -38,6 +39,20 @@ def analyze_command(args: argparse.Namespace) -> int:
 def brief_command(args: argparse.Namespace) -> int:
     report = _build_report(args)
     _write_or_print(to_codex_brief(report), args.output)
+    return 0
+
+
+def apply_pack_command(args: argparse.Namespace) -> int:
+    config = load_config(args.config)
+    snapshot = load_snapshot(args.snapshot)
+    report = analyze_snapshot(snapshot, config)
+    text = build_application_pack(
+        snapshot,
+        report,
+        role=args.role,
+        repository_url=args.repository_url,
+    )
+    _write_or_print(text, args.output)
     return 0
 
 
@@ -79,6 +94,14 @@ def build_parser() -> argparse.ArgumentParser:
     brief.add_argument("--config", type=Path, default=None, help="Path to .maintainer-radar.toml.")
     brief.add_argument("--output", type=Path, default=None, help="Write brief to this file.")
     brief.set_defaults(func=brief_command)
+
+    apply_pack = subparsers.add_parser("apply-pack", help="Generate Codex for Open Source application evidence.")
+    apply_pack.add_argument("snapshot", type=Path, help="Path to a GitHub metadata snapshot JSON file.")
+    apply_pack.add_argument("--config", type=Path, default=None, help="Path to .maintainer-radar.toml.")
+    apply_pack.add_argument("--role", default="Primary maintainer", help="Maintainer role to include.")
+    apply_pack.add_argument("--repository-url", default=None, help="Public GitHub repository URL to include.")
+    apply_pack.add_argument("--output", type=Path, default=None, help="Write application pack to this file.")
+    apply_pack.set_defaults(func=apply_pack_command)
 
     init_config = subparsers.add_parser("init-config", help="Write a starter configuration file.")
     init_config.add_argument("--output", type=Path, default=Path(".maintainer-radar.toml"))

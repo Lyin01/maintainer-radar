@@ -64,3 +64,13 @@ The project is designed to make Codex useful to many maintainers, not only one r
 - [ ] Example report and Codex brief are committed or attached to release notes.
 - [ ] Real usage/adoption/importance signals are added above.
 
+## Generate A Fresh Application Pack
+
+After publishing the repository, generate a fresh snapshot and application pack:
+
+```bash
+python -m maintainer_radar snapshot-github YOUR_GITHUB_USERNAME/maintainer-radar --output reports/github-snapshot.json
+python -m maintainer_radar apply-pack reports/github-snapshot.json --repository-url https://github.com/YOUR_GITHUB_USERNAME/maintainer-radar --output reports/application-pack.md
+```
+
+Use the generated pack to verify character counts and identify missing evidence before submitting.

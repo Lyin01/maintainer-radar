@@ -50,3 +50,13 @@ python -m maintainer_radar brief examples/github-snapshot.json --output reports/
 ```
 
 The brief asks Codex to identify blockers, review checklists, stale issue responses, and missing evidence. It is intentionally explicit that Codex is helping a human maintainer, not making final decisions.
+
+## Application Evidence
+
+Run:
+
+```bash
+python -m maintainer_radar apply-pack reports/github-snapshot.json --repository-url https://github.com/owner/name --output reports/application-pack.md
+```
+
+The pack gives maintainers a form-ready summary with 500-character checks, maintenance-load metrics, top risks, and a checklist of evidence still needed before applying.
