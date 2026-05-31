@@ -4,7 +4,7 @@ Use this checklist to turn the local repository into a public GitHub project.
 
 ## Before Publishing
 
-- [ ] Replace `YOUR_GITHUB_USERNAME` in `pyproject.toml`, `.github/ISSUE_TEMPLATE/config.yml`, and docs.
+- [x] Replace GitHub username placeholders with `Lyin01`.
 - [ ] Run `python -m unittest`.
 - [ ] Run the sample CLI commands from the README.
 - [ ] Generate `reports/application-pack.md` and review missing evidence.
@@ -19,7 +19,7 @@ git init
 git add .
 git commit -m "Initial Maintainer Radar release"
 git branch -M main
-gh repo create YOUR_GITHUB_USERNAME/maintainer-radar --public --source . --remote origin --push
+gh repo create Lyin01/maintainer-radar --public --source . --remote origin --push
 ```
 
 Or publish with a fine-grained token:
@@ -34,7 +34,7 @@ For an organization repository, pass `-Org YOUR_ORG`.
 If GitHub CLI is unavailable, create a public empty repository on GitHub and run:
 
 ```bash
-git remote add origin https://github.com/YOUR_GITHUB_USERNAME/maintainer-radar.git
+git remote add origin https://github.com/Lyin01/maintainer-radar.git
 git push -u origin main
 ```
 

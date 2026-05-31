@@ -50,12 +50,12 @@ def build_application_pack(
     role: str = "Primary maintainer",
     repository_url: str | None = None,
 ) -> str:
-    repo_url = repository_url or snapshot.repository.url or "https://github.com/YOUR_GITHUB_USERNAME/maintainer-radar"
+    repo_url = repository_url or snapshot.repository.url or "https://github.com/Lyin01/maintainer-radar"
     p0_or_p1, high_prs, release_blockers = _risk_counts(report)
     open_issues = len(snapshot.issues)
     open_prs = len(snapshot.pull_requests)
 
-    has_public_url = repo_url.startswith("https://github.com/") and "YOUR_GITHUB_USERNAME" not in repo_url
+    has_public_url = repo_url.startswith("https://github.com/")
     has_maintenance_load = bool(open_issues or open_prs)
     has_codex_workflow = bool(report.issues or report.pull_requests)
 
@@ -140,4 +140,3 @@ def build_application_pack(
     )
 
     return "\n".join(lines) + "\n"
-

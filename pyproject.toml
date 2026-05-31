@@ -35,13 +35,12 @@ classifiers = [
 dependencies = []
 
 [project.urls]
-Homepage = "https://github.com/YOUR_GITHUB_USERNAME/maintainer-radar"
-Issues = "https://github.com/YOUR_GITHUB_USERNAME/maintainer-radar/issues"
-Documentation = "https://github.com/YOUR_GITHUB_USERNAME/maintainer-radar/tree/main/docs"
+Homepage = "https://github.com/Lyin01/maintainer-radar"
+Issues = "https://github.com/Lyin01/maintainer-radar/issues"
+Documentation = "https://github.com/Lyin01/maintainer-radar/tree/main/docs"
 
 [project.scripts]
 maintainer-radar = "maintainer_radar.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
-
