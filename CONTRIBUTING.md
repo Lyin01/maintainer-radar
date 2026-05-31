@@ -8,7 +8,7 @@ Thanks for helping maintainers spend less time sorting queues and more time maki
 python -m venv .venv
 .venv\Scripts\Activate.ps1
 python -m pip install -e .
-python -m unittest
+python -m unittest discover -s tests
 ```
 
 On macOS or Linux:
@@ -17,7 +17,7 @@ On macOS or Linux:
 python -m venv .venv
 source .venv/bin/activate
 python -m pip install -e .
-python -m unittest
+python -m unittest discover -s tests
 ```
 
 ## Contribution Guidelines
@@ -35,4 +35,3 @@ python -m unittest
 - Add a new report format.
 - Expand release readiness checks.
 - Improve docs for maintainers who are new to automation.
-

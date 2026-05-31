@@ -5,7 +5,7 @@ Use this checklist to turn the local repository into a public GitHub project.
 ## Before Publishing
 
 - [x] Replace GitHub username placeholders with `Lyin01`.
-- [ ] Run `python -m unittest`.
+- [ ] Run `python -m unittest discover -s tests`.
 - [ ] Run the sample CLI commands from the README.
 - [ ] Generate `reports/application-pack.md` and review missing evidence.
 - [ ] Run `python -m maintainer_radar gate reports/github-snapshot.json --warn-only --output reports/gate.md`.
