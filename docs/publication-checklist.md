@@ -1,0 +1,38 @@
+# Publication Checklist
+
+Use this checklist to turn the local repository into a public GitHub project.
+
+## Before Publishing
+
+- [ ] Replace `YOUR_GITHUB_USERNAME` in `pyproject.toml`, `.github/ISSUE_TEMPLATE/config.yml`, and docs.
+- [ ] Run `python -m unittest`.
+- [ ] Run the sample CLI commands from the README.
+- [ ] Review `docs/codex-for-open-source-application.md` and keep claims honest.
+- [ ] Choose a package name if publishing to PyPI later.
+
+## Publish To GitHub
+
+```bash
+git init
+git add .
+git commit -m "Initial Maintainer Radar release"
+git branch -M main
+gh repo create YOUR_GITHUB_USERNAME/maintainer-radar --public --source . --remote origin --push
+```
+
+If GitHub CLI is unavailable, create a public empty repository on GitHub and run:
+
+```bash
+git remote add origin https://github.com/YOUR_GITHUB_USERNAME/maintainer-radar.git
+git push -u origin main
+```
+
+## After Publishing
+
+- [ ] Confirm CI passes on GitHub.
+- [ ] Enable GitHub security advisories.
+- [ ] Enable Dependabot alerts.
+- [ ] Create `v0.1.0` release notes with sample report output.
+- [ ] Add real adoption or ecosystem evidence to the application dossier.
+- [ ] Submit the Codex for Open Source form.
+

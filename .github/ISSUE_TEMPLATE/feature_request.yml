@@ -1,0 +1,26 @@
+name: Feature request
+description: Suggest a maintainer workflow, rule, or report format.
+title: "[Feature]: "
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: textarea
+    id: workflow
+    attributes:
+      label: Maintainer workflow
+      description: Which maintenance task would this improve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety checks
+      options:
+        - label: This can work without sending private data to an external service.
+        - label: This keeps maintainer review in the loop.
+

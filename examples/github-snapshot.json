@@ -1,0 +1,84 @@
+{
+  "repository": {
+    "name": "example/critical-oss-project",
+    "default_branch": "main",
+    "description": "Example snapshot for Maintainer Radar.",
+    "url": "https://github.com/example/critical-oss-project"
+  },
+  "issues": [
+    {
+      "number": 41,
+      "title": "Possible token leak in debug logging",
+      "labels": ["security", "bug"],
+      "state": "open",
+      "createdAt": "2026-05-01T12:00:00Z",
+      "updatedAt": "2026-05-28T09:00:00Z",
+      "comments": 3,
+      "assignees": [],
+      "url": "https://github.com/example/critical-oss-project/issues/41"
+    },
+    {
+      "number": 44,
+      "title": "Regression: Windows path handling fails in release candidate",
+      "labels": ["bug", "regression", "release-blocker"],
+      "state": "open",
+      "createdAt": "2026-05-20T08:00:00Z",
+      "updatedAt": "2026-05-30T15:00:00Z",
+      "comments": 8,
+      "assignees": ["maintainer-a"],
+      "url": "https://github.com/example/critical-oss-project/issues/44"
+    },
+    {
+      "number": 45,
+      "title": "Document plugin lifecycle hooks",
+      "labels": ["documentation"],
+      "state": "open",
+      "createdAt": "2026-04-22T10:30:00Z",
+      "updatedAt": "2026-05-02T10:30:00Z",
+      "comments": 1,
+      "assignees": [],
+      "url": "https://github.com/example/critical-oss-project/issues/45"
+    }
+  ],
+  "pull_requests": [
+    {
+      "number": 88,
+      "title": "Refactor auth token storage",
+      "labels": ["security", "dependencies"],
+      "state": "open",
+      "isDraft": false,
+      "additions": 540,
+      "deletions": 210,
+      "changedFiles": 18,
+      "reviewDecision": "REVIEW_REQUIRED",
+      "mergeStateStatus": "BLOCKED",
+      "statusCheckRollup": [{"conclusion": "failure"}],
+      "createdAt": "2026-05-12T11:00:00Z",
+      "updatedAt": "2026-05-30T13:00:00Z",
+      "url": "https://github.com/example/critical-oss-project/pull/88"
+    },
+    {
+      "number": 89,
+      "title": "Fix typo in quickstart",
+      "labels": ["documentation"],
+      "state": "open",
+      "isDraft": false,
+      "additions": 2,
+      "deletions": 2,
+      "changedFiles": 1,
+      "reviewDecision": "APPROVED",
+      "mergeStateStatus": "CLEAN",
+      "statusCheckRollup": [{"conclusion": "success"}],
+      "createdAt": "2026-05-30T11:00:00Z",
+      "updatedAt": "2026-05-30T12:00:00Z",
+      "url": "https://github.com/example/critical-oss-project/pull/89"
+    }
+  ],
+  "release": {
+    "next_version": "0.8.0",
+    "target_date": "2026-06-07",
+    "blockers": ["Release candidate validation is incomplete."],
+    "notes": ["Prioritize Windows regression and auth review before release."]
+  }
+}
+

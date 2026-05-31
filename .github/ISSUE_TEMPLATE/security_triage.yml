@@ -1,0 +1,22 @@
+name: Security triage signal
+description: Public, non-sensitive report about security scoring behavior.
+title: "[Security triage]: "
+labels: ["security", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: Do not include private vulnerability details or secrets here.
+  - type: textarea
+    id: signal
+    attributes:
+      label: Signal
+      description: Which public label, title pattern, or PR metadata should Maintainer Radar handle?
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected scoring or action
+    validations:
+      required: true
+

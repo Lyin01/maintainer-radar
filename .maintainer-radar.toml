@@ -1,0 +1,14 @@
+[labels]
+security = ["security", "vulnerability", "cve", "auth", "permissions"]
+release_blocker = ["release-blocker", "regression", "breaking-change"]
+bug = ["bug", "defect", "crash"]
+needs_reproduction = ["needs-repro", "needs-reproduction", "cannot-reproduce"]
+documentation = ["docs", "documentation"]
+dependency = ["dependencies", "deps"]
+
+[thresholds]
+stale_issue_days = 60
+stale_pr_days = 21
+large_pr_files = 15
+large_pr_lines = 600
+

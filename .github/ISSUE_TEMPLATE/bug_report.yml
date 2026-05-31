@@ -1,0 +1,25 @@
+name: Bug report
+description: Report incorrect scoring, CLI errors, or broken reports.
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What happened?
+    validations:
+      required: true
+  - type: textarea
+    id: snapshot
+    attributes:
+      label: Minimal snapshot
+      description: Paste a small redacted JSON snapshot if possible.
+      render: json
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+
