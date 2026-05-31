@@ -41,6 +41,12 @@ Before tagging a release:
 4. Decide whether P1 issues and high-risk PRs block the release.
 5. Generate a Codex brief for focused review and test-gap suggestions.
 
+Run a gate before tagging:
+
+```bash
+python -m maintainer_radar gate reports/github-snapshot.json --output reports/gate.md
+```
+
 ## Codex Briefs
 
 Run:

@@ -6,6 +6,7 @@ from pathlib import Path
 
 from .application import build_application_pack
 from .config import DEFAULT_CONFIG_TEXT, load_config
+from .gate import evaluate_gate, gate_to_json, gate_to_markdown
 from .github_api import fetch_repository_snapshot
 from .loader import load_snapshot
 from .report import to_codex_brief, to_json, to_markdown
@@ -56,6 +57,22 @@ def apply_pack_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def gate_command(args: argparse.Namespace) -> int:
+    config = load_config(args.config)
+    snapshot = load_snapshot(args.snapshot)
+    report = analyze_snapshot(snapshot, config)
+    result = evaluate_gate(
+        report,
+        max_p1_issues=args.max_p1_issues,
+        max_high_risk_prs=args.max_high_risk_prs,
+    )
+    text = gate_to_json(result) if args.format == "json" else gate_to_markdown(result, report)
+    _write_or_print(text, args.output)
+    if args.warn_only:
+        return 0
+    return 0 if result.passed else 1
+
+
 def init_config_command(args: argparse.Namespace) -> int:
     if args.output.exists() and not args.force:
         raise SystemExit(f"{args.output} already exists. Pass --force to overwrite.")
@@ -102,6 +119,21 @@ def build_parser() -> argparse.ArgumentParser:
     apply_pack.add_argument("--repository-url", default=None, help="Public GitHub repository URL to include.")
     apply_pack.add_argument("--output", type=Path, default=None, help="Write application pack to this file.")
     apply_pack.set_defaults(func=apply_pack_command)
+
+    gate = subparsers.add_parser("gate", help="Run a release/security quality gate over a snapshot.")
+    gate.add_argument("snapshot", type=Path, help="Path to a GitHub metadata snapshot JSON file.")
+    gate.add_argument("--config", type=Path, default=None, help="Path to .maintainer-radar.toml.")
+    gate.add_argument("--format", choices=("markdown", "json"), default="markdown")
+    gate.add_argument("--max-p1-issues", type=int, default=0, help="Allowed P1 issue count before failing.")
+    gate.add_argument(
+        "--max-high-risk-prs",
+        type=int,
+        default=0,
+        help="Allowed high-risk PR count before failing.",
+    )
+    gate.add_argument("--warn-only", action="store_true", help="Always exit 0 after writing the gate report.")
+    gate.add_argument("--output", type=Path, default=None, help="Write gate report to this file.")
+    gate.set_defaults(func=gate_command)
 
     init_config = subparsers.add_parser("init-config", help="Write a starter configuration file.")
     init_config.add_argument("--output", type=Path, default=Path(".maintainer-radar.toml"))

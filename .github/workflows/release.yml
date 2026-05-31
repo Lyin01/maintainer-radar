@@ -7,9 +7,34 @@ on:
 
 permissions:
   contents: read
+  issues: read
+  pull-requests: read
 
 jobs:
+  quality-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install package
+        run: python -m pip install -e .
+      - name: Check release readiness
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python -m maintainer_radar snapshot-github "$GITHUB_REPOSITORY" --output reports/github-snapshot.json
+          python -m maintainer_radar gate reports/github-snapshot.json --output reports/gate.md
+      - name: Upload gate report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-quality-gate
+          path: reports/
+
   build:
+    needs: quality-gate
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -25,4 +50,3 @@ jobs:
         with:
           name: dist
           path: dist/*
-

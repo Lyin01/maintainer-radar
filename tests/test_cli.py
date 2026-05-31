@@ -50,6 +50,30 @@ class CliTests(unittest.TestCase):
             self.assertIn("Character count: 336 / 500", text)
             self.assertIn("P0/P1 issues detected: 2", text)
 
+    def test_gate_returns_failure_for_blocked_snapshot(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            output = Path(tmp) / "gate.md"
+            result = main(["gate", str(ROOT / "examples" / "github-snapshot.json"), "--output", str(output)])
+
+            self.assertEqual(result, 1)
+            self.assertIn("Status: **failed**", output.read_text(encoding="utf-8"))
+
+    def test_gate_warn_only_returns_success(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            output = Path(tmp) / "gate.md"
+            result = main(
+                [
+                    "gate",
+                    str(ROOT / "examples" / "github-snapshot.json"),
+                    "--warn-only",
+                    "--output",
+                    str(output),
+                ]
+            )
+
+            self.assertEqual(result, 0)
+            self.assertIn("Status: **failed**", output.read_text(encoding="utf-8"))
+
     def test_snapshot_github_writes_json(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             output = Path(tmp) / "snapshot.json"

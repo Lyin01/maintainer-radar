@@ -8,6 +8,7 @@ Use this checklist to turn the local repository into a public GitHub project.
 - [ ] Run `python -m unittest`.
 - [ ] Run the sample CLI commands from the README.
 - [ ] Generate `reports/application-pack.md` and review missing evidence.
+- [ ] Run `python -m maintainer_radar gate reports/github-snapshot.json --warn-only --output reports/gate.md`.
 - [ ] Review `docs/codex-for-open-source-application.md` and keep claims honest.
 - [ ] Choose a package name if publishing to PyPI later.
 
@@ -44,5 +45,6 @@ git push -u origin main
 - [ ] Enable Dependabot alerts.
 - [ ] Create `v0.1.0` release notes with sample report output.
 - [ ] Run the Maintenance Report workflow and download the application pack artifact.
+- [ ] Confirm the release quality gate behaves as expected for known blockers.
 - [ ] Add real adoption or ecosystem evidence to the application dossier.
 - [ ] Submit the Codex for Open Source form.

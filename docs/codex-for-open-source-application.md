@@ -62,6 +62,7 @@ The project is designed to make Codex useful to many maintainers, not only one r
 - [ ] Issues and PR templates are enabled.
 - [ ] At least one release is tagged.
 - [ ] Example report and Codex brief are committed or attached to release notes.
+- [ ] Release quality gate has been reviewed for the latest snapshot.
 - [ ] Real usage/adoption/importance signals are added above.
 
 ## Generate A Fresh Application Pack
