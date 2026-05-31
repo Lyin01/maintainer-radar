@@ -11,7 +11,7 @@
 
 ## 0.2 Maintainer Integrations
 
-- Direct GitHub API ingestion with fine-grained token scopes.
+- GraphQL-based review decision and CI check ingestion.
 - `gh` extension wrapper for maintainers who already use GitHub CLI.
 - Configurable label taxonomy per repository.
 - Markdown comments suitable for manual PR review notes.
@@ -30,4 +30,3 @@
 - Release note drafting from merged PRs.
 - Public benchmark snapshots from consenting open-source projects.
 - Documentation for maintainer teams adopting the tool across multiple repos.
-

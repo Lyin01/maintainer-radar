@@ -1,0 +1,35 @@
+name: Maintenance Report
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 6 * * 1"
+
+permissions:
+  contents: read
+  issues: read
+  pull-requests: read
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install package
+        run: python -m pip install -e .
+      - name: Generate maintainer reports
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python -m maintainer_radar snapshot-github "$GITHUB_REPOSITORY" --output reports/github-snapshot.json
+          python -m maintainer_radar analyze reports/github-snapshot.json --output reports/triage.md
+          python -m maintainer_radar brief reports/github-snapshot.json --output reports/codex-brief.md
+      - name: Upload reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: maintainer-radar-report
+          path: reports/
+

@@ -1,6 +1,7 @@
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from maintainer_radar.cli import main
 
@@ -29,7 +30,21 @@ class CliTests(unittest.TestCase):
             self.assertIn("Codex Maintenance Brief", text)
             self.assertIn("Requested Codex Work", text)
 
+    def test_snapshot_github_writes_json(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            output = Path(tmp) / "snapshot.json"
+            snapshot = {
+                "repository": {"name": "example/project"},
+                "issues": [],
+                "pull_requests": [],
+                "release": {"blockers": [], "notes": []},
+            }
+            with patch("maintainer_radar.cli.fetch_repository_snapshot", return_value=snapshot):
+                result = main(["snapshot-github", "example/project", "--output", str(output)])
+
+            self.assertEqual(result, 0)
+            self.assertIn('"example/project"', output.read_text(encoding="utf-8"))
+
 
 if __name__ == "__main__":
     unittest.main()
-

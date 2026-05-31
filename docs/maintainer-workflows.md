@@ -7,7 +7,8 @@ Maintainer Radar supports three high-friction maintenance loops.
 Run:
 
 ```bash
-python -m maintainer_radar analyze examples/github-snapshot.json --output reports/triage.md
+python -m maintainer_radar snapshot-github owner/name --output reports/github-snapshot.json
+python -m maintainer_radar analyze reports/github-snapshot.json --output reports/triage.md
 ```
 
 Use the report to:
@@ -49,4 +50,3 @@ python -m maintainer_radar brief examples/github-snapshot.json --output reports/
 ```
 
 The brief asks Codex to identify blockers, review checklists, stale issue responses, and missing evidence. It is intentionally explicit that Codex is helping a human maintainer, not making final decisions.
-

@@ -26,6 +26,13 @@ Generate a starter config:
 python -m maintainer_radar init-config --output .maintainer-radar.toml
 ```
 
+Fetch a live GitHub snapshot:
+
+```bash
+python -m maintainer_radar snapshot-github owner/name --output reports/github-snapshot.json
+python -m maintainer_radar analyze reports/github-snapshot.json --output reports/triage.md
+```
+
 ## Input Format
 
 Maintainer Radar accepts a JSON snapshot with `repository`, `issues`, `pull_requests`, and optional `release` sections. The example in [examples/github-snapshot.json](examples/github-snapshot.json) shows the supported shape.
@@ -43,6 +50,7 @@ The Codex for Open Source form asks for a public GitHub username, a public repos
 
 - Working maintainer automation with tests and sample outputs.
 - CI, CodeQL, release workflow, issue templates, PR template, security policy, governance, and contribution docs.
+- A scheduled maintenance report workflow that fetches GitHub data and exports review artifacts.
 - Committed sample output in [examples/sample-report.md](examples/sample-report.md) and [examples/sample-codex-brief.md](examples/sample-codex-brief.md).
 - A prepared application dossier in [docs/codex-for-open-source-application.md](docs/codex-for-open-source-application.md).
 - A public launch checklist in [docs/publication-checklist.md](docs/publication-checklist.md).

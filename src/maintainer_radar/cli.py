@@ -1,16 +1,14 @@
 from __future__ import annotations
 
 import argparse
+import json
 from pathlib import Path
-from typing import Callable
 
 from .config import DEFAULT_CONFIG_TEXT, load_config
+from .github_api import fetch_repository_snapshot
 from .loader import load_snapshot
 from .report import to_codex_brief, to_json, to_markdown
 from .rules import analyze_snapshot
-
-
-Formatter = Callable[[object], str]
 
 
 def _write_or_print(text: str, output: Path | None) -> None:
@@ -50,6 +48,18 @@ def init_config_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def snapshot_github_command(args: argparse.Namespace) -> int:
+    snapshot = fetch_repository_snapshot(
+        args.repository,
+        issue_limit=args.issues,
+        pr_limit=args.prs,
+        token=args.token,
+    )
+    text = json.dumps(snapshot, indent=2, sort_keys=True) + "\n"
+    _write_or_print(text, args.output)
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="maintainer-radar",
@@ -75,6 +85,14 @@ def build_parser() -> argparse.ArgumentParser:
     init_config.add_argument("--force", action="store_true", help="Overwrite an existing config.")
     init_config.set_defaults(func=init_config_command)
 
+    snapshot = subparsers.add_parser("snapshot-github", help="Fetch a public GitHub repository snapshot.")
+    snapshot.add_argument("repository", help="Repository in owner/name form.")
+    snapshot.add_argument("--issues", type=int, default=100, help="Maximum open issues to include.")
+    snapshot.add_argument("--prs", type=int, default=50, help="Maximum open pull requests to include.")
+    snapshot.add_argument("--token", default=None, help="GitHub token. Defaults to GITHUB_TOKEN.")
+    snapshot.add_argument("--output", type=Path, default=None, help="Write snapshot JSON to this file.")
+    snapshot.set_defaults(func=snapshot_github_command)
+
     return parser
 
 
@@ -82,4 +100,3 @@ def main(argv: list[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
     return int(args.func(args))
-

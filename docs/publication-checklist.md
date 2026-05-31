@@ -20,6 +20,15 @@ git branch -M main
 gh repo create YOUR_GITHUB_USERNAME/maintainer-radar --public --source . --remote origin --push
 ```
 
+Or publish with a fine-grained token:
+
+```powershell
+$env:GITHUB_TOKEN = "github_pat_..."
+.\scripts\publish-github.ps1
+```
+
+For an organization repository, pass `-Org YOUR_ORG`.
+
 If GitHub CLI is unavailable, create a public empty repository on GitHub and run:
 
 ```bash
@@ -35,4 +44,3 @@ git push -u origin main
 - [ ] Create `v0.1.0` release notes with sample report output.
 - [ ] Add real adoption or ecosystem evidence to the application dossier.
 - [ ] Submit the Codex for Open Source form.
-
